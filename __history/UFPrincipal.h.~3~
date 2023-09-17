@@ -1,0 +1,51 @@
+//---------------------------------------------------------------------------
+
+#ifndef UFPrincipalH
+#define UFPrincipalH
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+#include <Vcl.Controls.hpp>
+#include <Vcl.StdCtrls.hpp>
+#include <Vcl.Forms.hpp>
+#include <Vcl.Menus.hpp>
+
+
+//probando
+#include <Vcl.Grids.hpp>
+//---------------------------------------------------------------------------
+class TForm1 : public TForm
+{
+__published:	// IDE-managed Components
+	TMainMenu *MainMenu1;
+	TMenuItem *Numeros1;
+	TMenuItem *Numeros2;
+	TMenuItem *Vectores1;
+	TMenuItem *Vectores2;
+	TMenuItem *SumaDig;
+	TEdit *Ed1;
+	TLabel *lb1;
+	TStringGrid *sgVector;
+	TMenuItem *ContarDigitosPares1;
+	TMenuItem *SumarDigitosPares1;
+	TMenuItem *SumarDigitosImpares1;
+	TMenuItem *Auxiliares1;
+	TMenuItem *EsPrimo1;
+	TMenuItem *CantidadDigitos;
+	TMenuItem *ContarDigitosImpares1;
+	TMenuItem *RetornarDigitoMayor1;
+	void __fastcall SumaDigClick(TObject *Sender);
+	void __fastcall ContarDigitosPares1Click(TObject *Sender);
+	void __fastcall SumarDigitosPares1Click(TObject *Sender);
+	void __fastcall SumarDigitosImpares1Click(TObject *Sender);
+	void __fastcall EsPrimo1Click(TObject *Sender);
+	void __fastcall CantidadDigitosClick(TObject *Sender);
+	void __fastcall ContarDigitosImpares1Click(TObject *Sender);
+	void __fastcall RetornarDigitoMayor1Click(TObject *Sender);
+private:	// User declarations
+public:		// User declarations
+	__fastcall TForm1(TComponent* Owner);
+};
+//---------------------------------------------------------------------------
+extern PACKAGE TForm1 *Form1;
+//---------------------------------------------------------------------------
+#endif
