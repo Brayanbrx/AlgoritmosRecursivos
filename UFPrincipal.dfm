@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Practicas Recursivas C++'
-  ClientHeight = 635
-  ClientWidth = 1031
+  ClientHeight = 631
+  ClientWidth = 1029
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -164,6 +164,33 @@ object Form1: TForm1
         Caption = 'Eliminar Digitos enviados por Parametro'
         OnClick = EliminarDigitosenviadosporParametro1Click
       end
+      object Cantidaddedigimparesantesdeunpar1: TMenuItem
+        Caption = 'Cantidad de dig impares antes de un par'
+        OnClick = Cantidaddedigimparesantesdeunpar1Click
+      end
+    end
+    object SeriesNumeros1: TMenuItem
+      Caption = 'Series Numeros'
+      object Fibonacci1: TMenuItem
+        Caption = '0,1,1,2,3,5,8 n-esimo'
+        OnClick = Fibonacci1Click
+      end
+      object N1236714130311: TMenuItem
+        Caption = '1,2,3,6,7,14,1,30,31 n-esimo'
+        OnClick = N1236714130311Click
+      end
+      object N02468101214161: TMenuItem
+        Caption = '0,2,4,6,8,10,12,14,16 Suma Primeros n'
+        OnClick = N02468101214161Click
+      end
+      object N1371531631272551: TMenuItem
+        Caption = '1,3,7,15,31,63,127,255 n-esimo'
+        OnClick = N1371531631272551Click
+      end
+      object N1245101213262829sumaPar1: TMenuItem
+        Caption = '1,2,4,5,10,12,13,26,28,29 suma Par'
+        OnClick = N1245101213262829sumaPar1Click
+      end
     end
     object Numeros2: TMenuItem
       Caption = 'Cadenas'
@@ -211,6 +238,10 @@ object Form1: TForm1
       object Menor1: TMenuItem
         Caption = 'Menor'
         OnClick = Menor1Click
+      end
+      object HayundigitoPar1: TMenuItem
+        Caption = 'Hay un digito Par?'
+        OnClick = HayundigitoPar1Click
       end
     end
   end

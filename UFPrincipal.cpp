@@ -34,6 +34,9 @@ Cardinal nMen(Cardinal n1,Cardinal n2){
 	return (n1>=n2 && (n1 && n2)!=0) ? n2 : n1 ;
 }
 
+bool hayUnPar(Cardinal num){
+	return (num==0) ? false : hayUnPar(num/10) || (num%10%2==0 && num%10!=0) ;
+}
 
 //Algoritmos Numericos
 Byte sumadig(Cardinal n){
@@ -97,11 +100,11 @@ void elimDigImpar(Cardinal &num){
 void moverDigMayorFin(Cardinal &num){
 	if (num>9) {
 		byte dig = num%10;
-		num = num/10;
+		num /= 10;
 			moverDigMayorFin(num);
 			if (num%10>dig) {
 				Byte aux = num%10;
-				num = num / 10;
+				num /= 10;
 				num = (num * 10 + dig) * 10 + aux;
 			} else
 				num = num * 10 + dig;
@@ -115,7 +118,7 @@ void moverDigMenorFin(Cardinal &num){
 		moverDigMenorFin(num);
 			if (num%10<dig) {
 				Byte aux = num%10;
-				num = num/10;
+				num /= 10;
 				num = (num*10 + dig) * 10 + aux;
 			} else
 				num = num * 10 + dig;
@@ -123,11 +126,10 @@ void moverDigMenorFin(Cardinal &num){
 }
 
 void ordenarAscendente(Cardinal &num){
-Byte dig;
 	if (num>9) {
 		moverDigMayorFin(num);
-		dig = num%10;
-		num = num/10;
+		byte dig = num%10;
+		num /= 10;
 		ordenarAscendente(num);
             num = num * 10 + dig;
 	}
@@ -138,7 +140,7 @@ Byte dig;
 	if (num>9) {
 		moverDigMenorFin(num);
 		dig = num%10;
-		num = num/10;
+		num /= 10;
 		ordenarDescendente(num);
 			num = num * 10 + dig;
 	}
@@ -187,6 +189,81 @@ void elimDigN(Cardinal &n, Byte d){
 				n=n*10+dig;
 	}
 }
+
+Byte cantDigImparAntesPar(Cardinal num){
+	return (num<10 || num%10%2==0 || !(hayUnPar(num))) ? 0 : cantDigImparAntesPar(num/10) + 1;
+	  /*if (num<10 || num%10%2==0 || !(hayUnPar(num))) {
+		  cont=0;
+	  } else{
+		 cont= cantDigImparAntesPar(num/10);
+			cont++;
+	  } */
+}
+
+//Algoritmos Series Numericas
+
+Byte fiboEne(Byte n){
+	return (n<2) ? n : fiboEne(n-1) + fiboEne(n-2) ;
+}
+
+Byte serie1(Byte num){
+/*Byte res;
+	if (num<=1) {
+		res= 1;
+	}else {
+		res = serie1(num-1);
+			res = (num%2==0) ? res*2 : res+1;
+	}
+	return res;*/
+return (num == 0) ? 0 : (num <= 1) ? 1 : ((num % 2 == 0) ? (serie1(num - 1) * 2) : (serie1(num - 1) + 1));
+}
+
+Cardinal serie2(Byte num){
+	return (num == 0) ? 0 : ((num <= 1) ? 1 : serie2(num - 1) * 2 + 1);
+}
+
+Byte SumaPar(Byte num){
+	return (num<=1) ? 0: SumaPar(num-1) + 2 ;
+}
+
+Byte SumaSerie(Byte num){
+	return (num>0) ? SumaSerie(num-1) + SumaPar(num) : 0 ;
+}
+
+Byte serie3(Byte num, Byte &con){
+Byte res;
+	if(num<=1){
+		res=1;
+	} else{
+		res = serie3(num-1, con);
+		con++;
+			if(con%3==0){
+				res=res+1;
+				con=0;
+			} else if(con%2==0 && con%3!=0){
+				res=  res+2;
+			} else{
+				res=res*2;
+			}
+	}
+	return res;
+}
+
+
+Byte SumaSeriePar(Byte num){
+Byte res, con=0, serie;
+	if(num<=1){
+		res=0;
+	} else{
+		serie = serie3(num,con);
+		res = SumaSeriePar(num-1);
+			if(serie%2==0)
+				res=res+serie;
+	}
+	return res;
+}
+
+
 
 
 //Algoritos con Cadenas
@@ -504,6 +581,66 @@ void __fastcall TForm1::EliminarDigitosenviadosporParametro1Click(TObject *Sende
 {
 	Cardinal res =  StrToInt(Ed1->Text);
 	elimDigN(res, StrToInt(Ed2->Text));
+	ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::Cantidaddedigimparesantesdeunpar1Click(TObject *Sender)
+{
+	Cardinal num = StrToInt(Ed1->Text);
+	Byte res = cantDigImparAntesPar(num);
+	ShowMessage(res);
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::HayundigitoPar1Click(TObject *Sender)
+{
+	Cardinal num = StrToInt(Ed1->Text);
+	if(hayUnPar(num))
+		ShowMessage("Hay un digito par");
+	else
+		ShowMessage("No hay un digito par");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Fibonacci1Click(TObject *Sender)
+{
+Byte num = StrToInt(Ed1->Text), res;
+res = (num!=0) ? fiboEne(num-1) : fiboEne(num);
+ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N1236714130311Click(TObject *Sender)
+{
+Byte num = StrToInt(Ed1->Text), res = serie1(num);
+ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::N1371531631272551Click(TObject *Sender)
+{
+Byte num = StrToInt(Ed1->Text);
+Cardinal res = serie2(num);
+ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::N02468101214161Click(TObject *Sender)
+{
+Byte num = StrToInt(Ed1->Text), res = SumaSerie(num);
+ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::N1245101213262829sumaPar1Click(TObject *Sender)
+{
+	//Byte con=0;
+	Byte num = StrToInt(Ed1->Text), res = SumaSeriePar(num);
 	ShowMessage(res);
 }
 //---------------------------------------------------------------------------

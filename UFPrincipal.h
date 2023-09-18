@@ -57,6 +57,14 @@ __published:	// IDE-managed Components
 	TMenuItem *Mayor1;
 	TMenuItem *Menor1;
 	TMenuItem *EliminarDigitosenviadosporParametro1;
+	TMenuItem *Cantidaddedigimparesantesdeunpar1;
+	TMenuItem *HayundigitoPar1;
+	TMenuItem *SeriesNumeros1;
+	TMenuItem *Fibonacci1;
+	TMenuItem *N1236714130311;
+	TMenuItem *N02468101214161;
+	TMenuItem *N1371531631272551;
+	TMenuItem *N1245101213262829sumaPar1;
 	void __fastcall SumaDigClick(TObject *Sender);
 	void __fastcall ContarDigitosPares1Click(TObject *Sender);
 	void __fastcall SumarDigitosPares1Click(TObject *Sender);
@@ -87,6 +95,13 @@ __published:	// IDE-managed Components
 	void __fastcall Mayor1Click(TObject *Sender);
 	void __fastcall Menor1Click(TObject *Sender);
 	void __fastcall EliminarDigitosenviadosporParametro1Click(TObject *Sender);
+	void __fastcall Cantidaddedigimparesantesdeunpar1Click(TObject *Sender);
+	void __fastcall HayundigitoPar1Click(TObject *Sender);
+	void __fastcall Fibonacci1Click(TObject *Sender);
+	void __fastcall N1236714130311Click(TObject *Sender);
+	void __fastcall N1371531631272551Click(TObject *Sender);
+	void __fastcall N02468101214161Click(TObject *Sender);
+	void __fastcall N1245101213262829sumaPar1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
