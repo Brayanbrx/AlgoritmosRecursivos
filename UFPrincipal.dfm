@@ -214,6 +214,10 @@ object Form1: TForm1
         Caption = 'Invertir Cadena'
         OnClick = InvertirCadena1Click
       end
+      object CantidaddePalabras1: TMenuItem
+        Caption = 'Cantidad de Palabras'
+        OnClick = CantidaddePalabras1Click
+      end
     end
     object Vectores1: TMenuItem
       Caption = 'Vectores'

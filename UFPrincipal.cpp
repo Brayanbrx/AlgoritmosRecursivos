@@ -315,7 +315,7 @@ Cardinal num;
 	return num;
 }
 
-void elimVocal(String &cad){
+void elimVocal(AnsiString &cad){
 char letra;
 Byte len = cad.Length();
 	if (len>0) {
@@ -326,7 +326,7 @@ Byte len = cad.Length();
 	}
 }
 
-void inverCad(String &cad){
+void inverCad(AnsiString &cad){
 char letra;
 Byte len = cad.Length();
 	if (len>0) {
@@ -335,6 +335,20 @@ Byte len = cad.Length();
 		inverCad(cad);
 			cad = String(letra) + cad;
 	}
+}
+
+Byte CantPal(String cad){
+Byte len = cad.Length(), cont, p;
+String pal;
+	if (len > 0) {
+		cad = cad.Trim();
+		p = cad.LastDelimiter(' ');
+		pal = cad.SubString(p+1,len-p);
+		cad.Delete(p + 1,len-p);
+		cont = CantPal(cad);
+		cont++;
+	}
+	return cont;
 }
 
 
@@ -539,7 +553,7 @@ void __fastcall TForm1::SacarNumerodeCad1Click(TObject *Sender)
 
 void __fastcall TForm1::EliminarVocales1Click(TObject *Sender)
 {
-	String cad = Ed1->Text;
+	AnsiString cad = Ed1->Text;
 	elimVocal(cad);
 	ShowMessage(cad);
 }
@@ -547,7 +561,7 @@ void __fastcall TForm1::EliminarVocales1Click(TObject *Sender)
 
 void __fastcall TForm1::InvertirCadena1Click(TObject *Sender)
 {
-	String cad = Ed1->Text;
+	AnsiString cad = Ed1->Text;
 	inverCad(cad);
 	ShowMessage(cad);
 }
@@ -641,6 +655,14 @@ void __fastcall TForm1::N1245101213262829sumaPar1Click(TObject *Sender)
 {
 	//Byte con=0;
 	Byte num = StrToInt(Ed1->Text), res = SumaSeriePar(num);
+	ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CantidaddePalabras1Click(TObject *Sender)
+{
+	String cad = Ed1->Text;
+	Byte res= CantPal(cad);
 	ShowMessage(res);
 }
 //---------------------------------------------------------------------------
