@@ -68,6 +68,7 @@ __published:	// IDE-managed Components
 	TMenuItem *CantidaddePalabras1;
 	TMenuItem *PalabramasLarga1;
 	TMenuItem *InvertirCadapalabraenunacadena1;
+	TMenuItem *ElimPrimLetra1;
 	void __fastcall SumaDigClick(TObject *Sender);
 	void __fastcall ContarDigitosPares1Click(TObject *Sender);
 	void __fastcall SumarDigitosPares1Click(TObject *Sender);
@@ -108,6 +109,7 @@ __published:	// IDE-managed Components
 	void __fastcall CantidaddePalabras1Click(TObject *Sender);
 	void __fastcall PalabramasLarga1Click(TObject *Sender);
 	void __fastcall InvertirCadapalabraenunacadena1Click(TObject *Sender);
+	void __fastcall ElimPrimLetra1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

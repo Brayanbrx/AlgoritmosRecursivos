@@ -1,4 +1,4 @@
-//---------------------------------------------------------------------------
+﻿//---------------------------------------------------------------------------
 
 #include <vcl.h>
 #include <algorithm>
@@ -366,6 +366,37 @@ Byte len = cad.Length(), p;
 	return res;
 }
 
+AnsiString InvPalabras(AnsiString cad){
+AnsiString pal, res;
+Byte len = cad.Length(), p;
+	if (len>0) {
+		cad = cad.Trim();
+		p = cad.LastDelimiter(' ');
+		pal = cad.SubString(p+1,len-p);
+		cad.Delete(p+1,len-p);
+		res = InvPalabras(cad);
+			inverCad(pal);
+			res = res + pal + ' ';;
+	}
+	return res;
+}
+
+AnsiString ElimPrimLetra(AnsiString cad){
+AnsiString pal, res;
+Byte len = cad.Length(), pos;
+	if (len>0) {
+		cad = cad.Trim();
+		pos = cad.LastDelimiter(' ');
+		pal = cad.SubString(pos+1,len-pos);
+		cad.Delete(pos+1,len-pos);
+		res = ElimPrimLetra(cad);
+			pal.Delete(1,1);
+			res = res + pal + ' ';
+	}
+	return res;
+
+}
+
 
 //Algoritmos con Vectores
 
@@ -685,6 +716,21 @@ void __fastcall TForm1::PalabramasLarga1Click(TObject *Sender)
 {
 	AnsiString cad = Ed1->Text;
 	AnsiString res = cadMasLarga(cad);
+	ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::InvertirCadapalabraenunacadena1Click(TObject *Sender)
+{
+	AnsiString cad = Ed1->Text;
+	AnsiString res = InvPalabras(cad);
+	ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::ElimPrimLetra1Click(TObject *Sender)
+{
+	AnsiString cad = Ed1->Text, res = ElimPrimLetra(cad);
 	ShowMessage(res);
 }
 //---------------------------------------------------------------------------

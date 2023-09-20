@@ -226,6 +226,10 @@ object Form1: TForm1
         Caption = 'Invertir Cada palabra en una cadena'
         OnClick = InvertirCadapalabraenunacadena1Click
       end
+      object ElimPrimLetra1: TMenuItem
+        Caption = 'Eliminar primer letra de cada palabra'
+        OnClick = ElimPrimLetra1Click
+      end
     end
     object Vectores1: TMenuItem
       Caption = 'Vectores'
