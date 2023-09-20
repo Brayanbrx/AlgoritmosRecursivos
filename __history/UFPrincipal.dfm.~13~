@@ -218,10 +218,6 @@ object Form1: TForm1
         Caption = 'Cantidad de Palabras'
         OnClick = CantidaddePalabras1Click
       end
-      object PalabramasLarga1: TMenuItem
-        Caption = 'Palabra mas Larga'
-        OnClick = PalabramasLarga1Click
-      end
     end
     object Vectores1: TMenuItem
       Caption = 'Vectores'

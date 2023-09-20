@@ -351,20 +351,6 @@ String pal;
 	return cont;
 }
 
-AnsiString cadMasLarga(AnsiString cad){
-AnsiString pal,res;
-Byte len = cad.Length(), p;
-	if (len>0) {
-		cad = cad.Trim();
-		p = cad.LastDelimiter(' ');
-		pal = cad.SubString(p+1,len-p);
-		cad.Delete(p+1,len-p);
-		res = cadMasLarga(cad);
-			if (pal.Length()>res.Length())
-				res = pal;
-	}
-	return res;
-}
 
 
 //Algoritmos con Vectores
@@ -677,14 +663,6 @@ void __fastcall TForm1::CantidaddePalabras1Click(TObject *Sender)
 {
 	String cad = Ed1->Text;
 	Byte res= CantPal(cad);
-	ShowMessage(res);
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm1::PalabramasLarga1Click(TObject *Sender)
-{
-	AnsiString cad = Ed1->Text;
-	AnsiString res = cadMasLarga(cad);
 	ShowMessage(res);
 }
 //---------------------------------------------------------------------------
