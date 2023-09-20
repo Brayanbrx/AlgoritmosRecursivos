@@ -222,6 +222,10 @@ object Form1: TForm1
         Caption = 'Palabra mas Larga'
         OnClick = PalabramasLarga1Click
       end
+      object InvertirCadapalabraenunacadena1: TMenuItem
+        Caption = 'Invertir Cada palabra en una cadena'
+        OnClick = InvertirCadapalabraenunacadena1Click
+      end
     end
     object Vectores1: TMenuItem
       Caption = 'Vectores'

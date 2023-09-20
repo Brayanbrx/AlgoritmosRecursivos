@@ -366,21 +366,6 @@ Byte len = cad.Length(), p;
 	return res;
 }
 
-AnsiString InvPalabras(AnsiString cad){
-AnsiString pal, res;
-Byte len = cad.Length(), p;
-	if (len>0) {
-		cad = cad.Trim();
-		p = cad.LastDelimiter(' ');
-		pal = cad.SubString(p+1,len-p);
-		cad.Delete(p+1,len-p);
-		res = InvPalabras(cad);
-			inverCad(pal);
-			res = res + pal + ' ';;
-	}
-	return res;
-}
-
 
 //Algoritmos con Vectores
 
@@ -700,14 +685,6 @@ void __fastcall TForm1::PalabramasLarga1Click(TObject *Sender)
 {
 	AnsiString cad = Ed1->Text;
 	AnsiString res = cadMasLarga(cad);
-	ShowMessage(res);
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TForm1::InvertirCadapalabraenunacadena1Click(TObject *Sender)
-{
-	AnsiString cad = Ed1->Text;
-	AnsiString res = InvPalabras(cad);
 	ShowMessage(res);
 }
 //---------------------------------------------------------------------------
