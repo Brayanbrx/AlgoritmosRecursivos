@@ -38,6 +38,32 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object lbColumna: TLabel
+    Left = 197
+    Top = 62
+    Width = 80
+    Height = 21
+    Caption = 'Columnas:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lbFila: TLabel
+    Left = 96
+    Top = 67
+    Width = 38
+    Height = 21
+    Caption = 'Filas:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object Ed1: TEdit
     Left = 147
     Top = 24
@@ -51,16 +77,18 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 0
   end
-  object SGVector: TStringGrid
-    Left = 256
-    Top = 280
-    Width = 320
-    Height = 120
+  object SG1: TStringGrid
+    Left = 24
+    Top = 104
+    Width = 889
+    Height = 449
     ColCount = 1
     FixedCols = 0
     RowCount = 1
     FixedRows = 0
-    TabOrder = 1
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goFixedRowDefAlign]
+    TabOrder = 4
+    OnDrawCell = SG1DrawCell
   end
   object Ed2: TEdit
     Left = 412
@@ -73,7 +101,35 @@ object Form1: TForm1
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
+    TabOrder = 1
+  end
+  object edFila: TEdit
+    Left = 140
+    Top = 59
+    Width = 30
+    Height = 29
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
+    OnChange = edFilaChange
+  end
+  object edColumna: TEdit
+    Left = 283
+    Top = 59
+    Width = 30
+    Height = 29
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    OnChange = edColumnaChange
   end
   object MainMenu1: TMainMenu
     Left = 24
@@ -233,6 +289,10 @@ object Form1: TForm1
     end
     object Vectores1: TMenuItem
       Caption = 'Vectores'
+      object Cantidaddenumerosparesdelvector1: TMenuItem
+        Caption = 'Cantidad de numeros pares del vector'
+        OnClick = Cantidaddenumerosparesdelvector1Click
+      end
     end
     object Vectores2: TMenuItem
       Caption = 'Matrices'
