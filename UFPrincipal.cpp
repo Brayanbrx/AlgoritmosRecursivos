@@ -401,18 +401,12 @@ Byte len = cad.Length(), pos;
 
 Byte ContNPares(TStringGrid *v, Byte Col){
 Byte res;
-
 	if (Col==1) {
-		if (StrToInt(v->Cells[Col-1][0]) % 2 == 0) {
-			res = 1;
-		} else{
-			res=0;
-		}
+		res = (StrToInt(v->Cells[Col-1][0]) % 2 == 0) ? 1 : 0;
 	} else{
 		res = ContNPares(v, Col-1);
-			if (StrToInt(v->Cells[Col-1][0]) % 2 == 0) {
+			if (StrToInt(v->Cells[Col-1][0]) % 2 == 0)
 				res++;
-			}
 	}
 	return res;
 }
