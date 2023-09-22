@@ -24,7 +24,7 @@ __published:	// IDE-managed Components
 	TMenuItem *SumaDig;
 	TEdit *Ed1;
 	TLabel *lb1;
-	TStringGrid *SGVector;
+	TStringGrid *SG1;
 	TMenuItem *ContarDigitosPares1;
 	TMenuItem *SumarDigitosPares1;
 	TMenuItem *SumarDigitosImpares1;
@@ -69,6 +69,11 @@ __published:	// IDE-managed Components
 	TMenuItem *PalabramasLarga1;
 	TMenuItem *InvertirCadapalabraenunacadena1;
 	TMenuItem *ElimPrimLetra1;
+	TLabel *lbColumna;
+	TLabel *lbFila;
+	TEdit *edFila;
+	TEdit *edColumna;
+	TMenuItem *Cantidaddenumerosparesdelvector1;
 	void __fastcall SumaDigClick(TObject *Sender);
 	void __fastcall ContarDigitosPares1Click(TObject *Sender);
 	void __fastcall SumarDigitosPares1Click(TObject *Sender);
@@ -110,6 +115,11 @@ __published:	// IDE-managed Components
 	void __fastcall PalabramasLarga1Click(TObject *Sender);
 	void __fastcall InvertirCadapalabraenunacadena1Click(TObject *Sender);
 	void __fastcall ElimPrimLetra1Click(TObject *Sender);
+	void __fastcall edFilaChange(TObject *Sender);
+	void __fastcall edColumnaChange(TObject *Sender);
+	void __fastcall SG1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect, TGridDrawState State);
+	void __fastcall Cantidaddenumerosparesdelvector1Click(TObject *Sender);
+
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);

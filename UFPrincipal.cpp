@@ -338,7 +338,7 @@ Byte len = cad.Length();
 }
 
 Byte CantPal(String cad){
-Byte len = cad.Length(), cont, p;
+Byte len = cad.Length(),cont, p;
 String pal;
 	if (len > 0) {
 		cad = cad.Trim();
@@ -346,7 +346,7 @@ String pal;
 		pal = cad.SubString(p+1,len-p);
 		cad.Delete(p + 1,len-p);
 		cont = CantPal(cad);
-		cont++;
+			cont++;
 	}
 	return cont;
 }
@@ -399,14 +399,22 @@ Byte len = cad.Length(), pos;
 
 //Algoritmos con Vectores
 
-Byte ContPares(TStringGrid v, Byte Col){
+Byte ContNPares(TStringGrid *v, Byte Col){
+Byte res;
 
 	if (Col==1) {
-		if (v->Cells) {
-
+		if (StrToInt(v->Cells[Col-1][0]) % 2 == 0) {
+			res = 1;
+		} else{
+			res=0;
 		}
-
+	} else{
+		res = ContNPares(v, Col-1);
+			if (StrToInt(v->Cells[Col-1][0]) % 2 == 0) {
+				res++;
+			}
 	}
+	return res;
 }
 
 
@@ -761,17 +769,17 @@ void __fastcall TForm1::edColumnaChange(TObject *Sender)
 void __fastcall TForm1::SG1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
 		  TGridDrawState State)
 {
-      TStringGrid *grid = dynamic_cast<TStringGrid*>(Sender);
+	  /*TStringGrid *grid = dynamic_cast<TStringGrid*>(Sender);
 
 	grid->Canvas->Pen->Color = clBlue;
-	grid->Canvas->Rectangle(Rect.Left, Rect.Top, Rect.Right, Rect.Bottom);
+	grid->Canvas->Rectangle(Rect.Left, Rect.Top, Rect.Right, Rect.Bottom); */
 
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TForm1::Cantidaddenumerosparesdelvector1Click(TObject *Sender)
 {
- Byte res = ContPares(SG1, SG1->ColCount);
+ Byte res = ContNPares(SG1, SG1->ColCount);
  ShowMessage(res);
 }
 //---------------------------------------------------------------------------
