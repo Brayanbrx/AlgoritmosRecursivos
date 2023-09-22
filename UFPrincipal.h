@@ -74,6 +74,10 @@ __published:	// IDE-managed Components
 	TEdit *edFila;
 	TEdit *edColumna;
 	TMenuItem *Cantidaddenumerosparesdelvector1;
+	TMenuItem *MergeSortOrdenar1;
+	TMenuItem *InsertionSortOrdenar1;
+	TMenuItem *Eliminardatoxdeunvector1;
+	TMenuItem *Eliminardatoxdeunvector2;
 	void __fastcall SumaDigClick(TObject *Sender);
 	void __fastcall ContarDigitosPares1Click(TObject *Sender);
 	void __fastcall SumarDigitosPares1Click(TObject *Sender);

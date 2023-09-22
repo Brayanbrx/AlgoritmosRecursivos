@@ -293,6 +293,18 @@ object Form1: TForm1
         Caption = 'Cantidad de numeros pares del vector'
         OnClick = Cantidaddenumerosparesdelvector1Click
       end
+      object MergeSortOrdenar1: TMenuItem
+        Caption = 'Merge Sort Ordenar'
+      end
+      object InsertionSortOrdenar1: TMenuItem
+        Caption = 'Insertion Sort Ordenar'
+      end
+      object Eliminardatoxdeunvector1: TMenuItem
+        Caption = 'Eliminar dato x de un vector'
+      end
+      object Eliminardatoxdeunvector2: TMenuItem
+        Caption = 'Invertir una parte de un vector entre a y b'
+      end
     end
     object Vectores2: TMenuItem
       Caption = 'Matrices'
