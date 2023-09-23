@@ -295,6 +295,7 @@ object Form1: TForm1
       end
       object MergeSortOrdenar1: TMenuItem
         Caption = 'Merge Sort Ordenar'
+        OnClick = MergeSortOrdenar1Click
       end
       object InsertionSortOrdenar1: TMenuItem
         Caption = 'Insertion Sort Ordenar'

@@ -123,6 +123,7 @@ __published:	// IDE-managed Components
 	void __fastcall edColumnaChange(TObject *Sender);
 	void __fastcall SG1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect, TGridDrawState State);
 	void __fastcall Cantidaddenumerosparesdelvector1Click(TObject *Sender);
+	void __fastcall MergeSortOrdenar1Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations

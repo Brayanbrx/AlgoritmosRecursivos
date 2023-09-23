@@ -412,6 +412,54 @@ Byte res;
 }
 
 
+//Metodos de Ordenacion
+void merge(unsigned int arr[], Byte inicio, Byte mitad, Byte fin){
+	int n1 = mitad - inicio+1;
+	int n2 = fin - mitad;
+	unsigned int tempLeft[n1];
+	unsigned int tempRight[n2];
+
+	for (int i = 0; i < n1; i++)
+		tempLeft[i] = arr[inicio + i];
+	for (int j = 0; j < n2; j++)
+		tempRight[j] = arr[mitad + 1 + j];
+
+	int i = 0, j = 0, k = inicio;
+
+	while (i < n1 && j < n2) {
+		if (tempLeft[i] <= tempRight[j]) {
+			arr[k] = tempLeft[i];
+			i++;
+		} else {
+			arr[k] = tempRight[j];
+			j++;
+		}
+		k++;
+	}
+
+	while (i < n1) {
+		arr[k] = tempLeft[i];
+		i++;
+		k++;
+	}
+
+	while (j < n2) {
+		arr[k] = tempRight[j];
+		j++;
+		k++;
+	}
+}
+
+
+void mergeSort(unsigned int arr[], Byte inicio, Byte fin) {
+	if (inicio < fin) {
+		Byte mitad = inicio + (fin - inicio) / 2;
+		mergeSort(arr, inicio, mitad);
+		mergeSort(arr, mitad + 1, fin);
+		merge(arr, inicio, mitad, fin);
+	}
+}
+
 //Algoritmos con Matrices
 
 
@@ -775,6 +823,24 @@ void __fastcall TForm1::Cantidaddenumerosparesdelvector1Click(TObject *Sender)
 {
  Byte res = ContNPares(SG1, SG1->ColCount);
  ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TForm1::MergeSortOrdenar1Click(TObject *Sender)
+{
+	Byte arraySize = SG1->ColCount;
+
+	unsigned int arr[arraySize];
+	for (Byte i = 0; i < arraySize; i++) {
+		arr[i] = StrToInt(SG1->Cells[i][0]);
+	}
+
+	mergeSort(arr, 0, arraySize - 1);
+
+	for (Byte i = 0; i < arraySize; i++) {
+		SG1->Cells[i][0] = (arr[i]);
+	}
 }
 //---------------------------------------------------------------------------
 

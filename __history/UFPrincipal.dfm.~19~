@@ -2,8 +2,8 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Practicas Recursivas C++'
-  ClientHeight = 635
-  ClientWidth = 1031
+  ClientHeight = 631
+  ClientWidth = 1029
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -38,6 +38,32 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object lbColumna: TLabel
+    Left = 197
+    Top = 62
+    Width = 80
+    Height = 21
+    Caption = 'Columnas:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lbFila: TLabel
+    Left = 96
+    Top = 67
+    Width = 38
+    Height = 21
+    Caption = 'Filas:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object Ed1: TEdit
     Left = 147
     Top = 24
@@ -51,16 +77,18 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 0
   end
-  object SGVector: TStringGrid
-    Left = 256
-    Top = 280
-    Width = 320
-    Height = 120
+  object SG1: TStringGrid
+    Left = 24
+    Top = 104
+    Width = 889
+    Height = 449
     ColCount = 1
     FixedCols = 0
     RowCount = 1
     FixedRows = 0
-    TabOrder = 1
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goFixedRowDefAlign]
+    TabOrder = 4
+    OnDrawCell = SG1DrawCell
   end
   object Ed2: TEdit
     Left = 412
@@ -73,7 +101,35 @@ object Form1: TForm1
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
+    TabOrder = 1
+  end
+  object edFila: TEdit
+    Left = 140
+    Top = 59
+    Width = 30
+    Height = 29
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
+    OnChange = edFilaChange
+  end
+  object edColumna: TEdit
+    Left = 283
+    Top = 59
+    Width = 30
+    Height = 29
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    OnChange = edColumnaChange
   end
   object MainMenu1: TMainMenu
     Left = 24
@@ -189,6 +245,7 @@ object Form1: TForm1
       end
       object N1245101213262829sumaPar1: TMenuItem
         Caption = '1,2,4,5,10,12,13,26,28,29 suma Par'
+        OnClick = N1245101213262829sumaPar1Click
       end
     end
     object Numeros2: TMenuItem
@@ -213,9 +270,41 @@ object Form1: TForm1
         Caption = 'Invertir Cadena'
         OnClick = InvertirCadena1Click
       end
+      object CantidaddePalabras1: TMenuItem
+        Caption = 'Cantidad de Palabras'
+        OnClick = CantidaddePalabras1Click
+      end
+      object PalabramasLarga1: TMenuItem
+        Caption = 'Palabra mas Larga'
+        OnClick = PalabramasLarga1Click
+      end
+      object InvertirCadapalabraenunacadena1: TMenuItem
+        Caption = 'Invertir Cada palabra en una cadena'
+        OnClick = InvertirCadapalabraenunacadena1Click
+      end
+      object ElimPrimLetra1: TMenuItem
+        Caption = 'Eliminar primer letra de cada palabra'
+        OnClick = ElimPrimLetra1Click
+      end
     end
     object Vectores1: TMenuItem
       Caption = 'Vectores'
+      object Cantidaddenumerosparesdelvector1: TMenuItem
+        Caption = 'Cantidad de numeros pares del vector'
+        OnClick = Cantidaddenumerosparesdelvector1Click
+      end
+      object MergeSortOrdenar1: TMenuItem
+        Caption = 'Merge Sort Ordenar'
+      end
+      object InsertionSortOrdenar1: TMenuItem
+        Caption = 'Insertion Sort Ordenar'
+      end
+      object Eliminardatoxdeunvector1: TMenuItem
+        Caption = 'Eliminar dato x de un vector'
+      end
+      object Eliminardatoxdeunvector2: TMenuItem
+        Caption = 'Invertir una parte de un vector entre a y b'
+      end
     end
     object Vectores2: TMenuItem
       Caption = 'Matrices'
