@@ -224,6 +224,10 @@ object Form1: TForm1
         Caption = 'Cantidad de dig impares antes de un par'
         OnClick = Cantidaddedigimparesantesdeunpar1Click
       end
+      object InvertirNumero1: TMenuItem
+        Caption = 'Invertir Numero'
+        OnClick = InvertirNumero1Click
+      end
     end
     object SeriesNumeros1: TMenuItem
       Caption = 'Series Numeros'

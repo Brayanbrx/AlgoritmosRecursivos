@@ -263,6 +263,22 @@ Byte res, con=0, serie;
 	return res;
 }
 
+Cardinal invertirNum(Cardinal num, Cardinal &c){
+Cardinal res;
+Byte dig;
+	if (num < 10){
+		res= num;
+		c=1;
+	}
+	 else{
+	dig = num % 10;
+	res = invertirNum(num/10,c);
+		c*=10;
+		res =  dig * c + res;
+	}
+	return res;
+}
+
 
 
 
@@ -841,6 +857,15 @@ void __fastcall TForm1::MergeSortOrdenar1Click(TObject *Sender)
 	for (Byte i = 0; i < arraySize; i++) {
 		SG1->Cells[i][0] = (arr[i]);
 	}
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::InvertirNumero1Click(TObject *Sender)
+{
+	Cardinal num = StrToInt(Ed1->Text), c=1;
+	Cardinal res = invertirNum(num,c);
+	ShowMessage(res);
+
 }
 //---------------------------------------------------------------------------
 

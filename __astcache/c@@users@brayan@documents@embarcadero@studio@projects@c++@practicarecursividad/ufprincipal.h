@@ -78,6 +78,7 @@ __published:	// IDE-managed Components
 	TMenuItem *InsertionSortOrdenar1;
 	TMenuItem *Eliminardatoxdeunvector1;
 	TMenuItem *Eliminardatoxdeunvector2;
+	TMenuItem *InvertirNumero1;
 	void __fastcall SumaDigClick(TObject *Sender);
 	void __fastcall ContarDigitosPares1Click(TObject *Sender);
 	void __fastcall SumarDigitosPares1Click(TObject *Sender);
@@ -124,6 +125,7 @@ __published:	// IDE-managed Components
 	void __fastcall SG1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect, TGridDrawState State);
 	void __fastcall Cantidaddenumerosparesdelvector1Click(TObject *Sender);
 	void __fastcall MergeSortOrdenar1Click(TObject *Sender);
+	void __fastcall InvertirNumero1Click(TObject *Sender);
 
 private:	// User declarations
 public:		// User declarations
