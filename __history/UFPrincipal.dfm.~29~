@@ -38,6 +38,32 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object lbColumna: TLabel
+    Left = 197
+    Top = 62
+    Width = 80
+    Height = 21
+    Caption = 'Columnas:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lbFila: TLabel
+    Left = 96
+    Top = 62
+    Width = 38
+    Height = 21
+    Caption = 'Filas:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object Ed1: TEdit
     Left = 147
     Top = 24
@@ -51,16 +77,18 @@ object Form1: TForm1
     ParentFont = False
     TabOrder = 0
   end
-  object SGVector: TStringGrid
-    Left = 256
-    Top = 280
-    Width = 320
-    Height = 120
+  object SG1: TStringGrid
+    Left = 24
+    Top = 104
+    Width = 889
+    Height = 449
     ColCount = 1
     FixedCols = 0
     RowCount = 1
     FixedRows = 0
-    TabOrder = 1
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goFixedRowDefAlign]
+    TabOrder = 4
+    OnDrawCell = SG1DrawCell
   end
   object Ed2: TEdit
     Left = 412
@@ -73,7 +101,35 @@ object Form1: TForm1
     Font.Name = 'Segoe UI'
     Font.Style = []
     ParentFont = False
+    TabOrder = 1
+  end
+  object edFila: TEdit
+    Left = 140
+    Top = 59
+    Width = 30
+    Height = 29
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
+    OnChange = edFilaChange
+  end
+  object edColumna: TEdit
+    Left = 283
+    Top = 59
+    Width = 30
+    Height = 29
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    OnChange = edColumnaChange
   end
   object MainMenu1: TMainMenu
     Left = 24
@@ -168,6 +224,14 @@ object Form1: TForm1
         Caption = 'Cantidad de dig impares antes de un par'
         OnClick = Cantidaddedigimparesantesdeunpar1Click
       end
+      object InvertirNumero1: TMenuItem
+        Caption = 'Invertir Numero'
+        OnClick = InvertirNumero1Click
+      end
+      object Potenciadeunnumero1: TMenuItem
+        Caption = 'Potencia de un numero'
+        OnClick = Potenciadeunnumero1Click
+      end
     end
     object SeriesNumeros1: TMenuItem
       Caption = 'Series Numeros'
@@ -222,12 +286,41 @@ object Form1: TForm1
         Caption = 'Palabra mas Larga'
         OnClick = PalabramasLarga1Click
       end
+      object InvertirCadapalabraenunacadena1: TMenuItem
+        Caption = 'Invertir Cada palabra en una cadena'
+        OnClick = InvertirCadapalabraenunacadena1Click
+      end
+      object ElimPrimLetra1: TMenuItem
+        Caption = 'Eliminar primer letra de cada palabra'
+        OnClick = ElimPrimLetra1Click
+      end
     end
     object Vectores1: TMenuItem
       Caption = 'Vectores'
+      object Cantidaddenumerosparesdelvector1: TMenuItem
+        Caption = 'Cantidad de numeros pares del vector'
+        OnClick = Cantidaddenumerosparesdelvector1Click
+      end
+      object MergeSortOrdenar1: TMenuItem
+        Caption = 'Merge Sort Ordenar'
+        OnClick = MergeSortOrdenar1Click
+      end
+      object InsertionSortOrdenar1: TMenuItem
+        Caption = 'Insertion Sort Ordenar'
+      end
+      object Eliminardatoxdeunvector1: TMenuItem
+        Caption = 'Eliminar dato x de un vector'
+      end
+      object Eliminardatoxdeunvector2: TMenuItem
+        Caption = 'Invertir una parte de un vector entre a y b'
+      end
     end
     object Vectores2: TMenuItem
       Caption = 'Matrices'
+      object LimpiarMatriz1: TMenuItem
+        Caption = 'Limpiar Matriz'
+        OnClick = LimpiarMatriz1Click
+      end
     end
     object Auxiliares1: TMenuItem
       Caption = 'Auxiliares'
@@ -250,6 +343,38 @@ object Form1: TForm1
       object HayundigitoPar1: TMenuItem
         Caption = 'Hay un digito Par?'
         OnClick = HayundigitoPar1Click
+      end
+    end
+    object Ordenamiento1: TMenuItem
+      Caption = 'Ordenamiento'
+      object BubbleSort1: TMenuItem
+        Caption = 'Bubble Sort'
+        OnClick = BubbleSort1Click
+      end
+      object SelectionSort1: TMenuItem
+        Caption = 'Selection Sort'
+        OnClick = SelectionSort1Click
+      end
+      object InsertionSort1: TMenuItem
+        Caption = 'Insertion Sort'
+        OnClick = InsertionSort1Click
+      end
+      object MergeSort1: TMenuItem
+        Caption = 'Merge Sort'
+        OnClick = MergeSort1Click
+      end
+    end
+    object ModelosdeExamen1: TMenuItem
+      Caption = 'Modelos de Examen'
+      object CargarunVectorconparesdeDigitosdeunnumero1: TMenuItem
+        Caption = 'Cargar un Vector con pares de Digitos de un numero '
+        OnClick = CargarunVectorconparesdeDigitosdeunnumero1Click
+      end
+      object Cargarunvectorconlosprimeros2caracteresdecadapalabradeunacadena1: TMenuItem
+        Caption = 
+          'Cargar un vector con los primeros 2 caracteres de cada palabra d' +
+          'e una cadena'
+        OnClick = Cargarunvectorconlosprimeros2caracteresdecadapalabradeunacadena1Click
       end
     end
   end

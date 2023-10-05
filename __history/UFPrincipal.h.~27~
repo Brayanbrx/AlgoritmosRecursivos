@@ -24,7 +24,7 @@ __published:	// IDE-managed Components
 	TMenuItem *SumaDig;
 	TEdit *Ed1;
 	TLabel *lb1;
-	TStringGrid *SGVector;
+	TStringGrid *SG1;
 	TMenuItem *ContarDigitosPares1;
 	TMenuItem *SumarDigitosPares1;
 	TMenuItem *SumarDigitosImpares1;
@@ -67,6 +67,28 @@ __published:	// IDE-managed Components
 	TMenuItem *N1245101213262829sumaPar1;
 	TMenuItem *CantidaddePalabras1;
 	TMenuItem *PalabramasLarga1;
+	TMenuItem *InvertirCadapalabraenunacadena1;
+	TMenuItem *ElimPrimLetra1;
+	TLabel *lbColumna;
+	TLabel *lbFila;
+	TEdit *edFila;
+	TEdit *edColumna;
+	TMenuItem *Cantidaddenumerosparesdelvector1;
+	TMenuItem *MergeSortOrdenar1;
+	TMenuItem *InsertionSortOrdenar1;
+	TMenuItem *Eliminardatoxdeunvector1;
+	TMenuItem *Eliminardatoxdeunvector2;
+	TMenuItem *InvertirNumero1;
+	TMenuItem *Potenciadeunnumero1;
+	TMenuItem *Ordenamiento1;
+	TMenuItem *BubbleSort1;
+	TMenuItem *SelectionSort1;
+	TMenuItem *InsertionSort1;
+	TMenuItem *MergeSort1;
+	TMenuItem *LimpiarMatriz1;
+	TMenuItem *ModelosdeExamen1;
+	TMenuItem *CargarunVectorconparesdeDigitosdeunnumero1;
+	TMenuItem *Cargarunvectorconlosprimeros2caracteresdecadapalabradeunacadena1;
 	void __fastcall SumaDigClick(TObject *Sender);
 	void __fastcall ContarDigitosPares1Click(TObject *Sender);
 	void __fastcall SumarDigitosPares1Click(TObject *Sender);
@@ -106,6 +128,25 @@ __published:	// IDE-managed Components
 	void __fastcall N1245101213262829sumaPar1Click(TObject *Sender);
 	void __fastcall CantidaddePalabras1Click(TObject *Sender);
 	void __fastcall PalabramasLarga1Click(TObject *Sender);
+	void __fastcall InvertirCadapalabraenunacadena1Click(TObject *Sender);
+	void __fastcall ElimPrimLetra1Click(TObject *Sender);
+	void __fastcall edFilaChange(TObject *Sender);
+	void __fastcall edColumnaChange(TObject *Sender);
+	void __fastcall SG1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect, TGridDrawState State);
+	void __fastcall Cantidaddenumerosparesdelvector1Click(TObject *Sender);
+	void __fastcall MergeSortOrdenar1Click(TObject *Sender);
+	void __fastcall InvertirNumero1Click(TObject *Sender);
+	void __fastcall Potenciadeunnumero1Click(TObject *Sender);
+	void __fastcall BubbleSort1Click(TObject *Sender);
+	void __fastcall SelectionSort1Click(TObject *Sender);
+	void __fastcall InsertionSort1Click(TObject *Sender);
+	void __fastcall MergeSort1Click(TObject *Sender);
+	void __fastcall LimpiarMatriz1Click(TObject *Sender);
+	void __fastcall CargarunVectorconparesdeDigitosdeunnumero1Click(TObject *Sender);
+	void __fastcall Cargarunvectorconlosprimeros2caracteresdecadapalabradeunacadena1Click(TObject *Sender);
+
+
+
 private:	// User declarations
 public:		// User declarations
 	__fastcall TForm1(TComponent* Owner);
