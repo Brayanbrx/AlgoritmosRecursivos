@@ -615,10 +615,30 @@ void limpiarV(TStringGrid *v, Byte Col, Byte Row){
 		v->Cells[Col-1][Row-1] = ' ';
 }
 
+// Auxiliares
+void llenarHorizontal(TStringGrid *m, Byte Fila, Byte ini, Byte fin, Byte num){
+	byte n = fin-ini+1;
+	if (n==1)
+		m->Cells[ini][Fila]=num;
+	else if(n>1){
+		llenarHorizontal(m,Fila,ini+1,fin-1,num);
+		m->Cells[ini][Fila] = num;
+		m->Cells[fin][Fila] = num;
+	}
+}
 
+void llenarVertical(TStringGrid *m, Byte Columna, Byte ini, Byte fin, Byte num){
+	byte n = fin-ini+1;
+	if (n==1)
+		m->Cells[Columna][ini]=num;
+	else if(n>1){
+		llenarVertical(m,Columna,ini+1,fin-1,num);
+		m->Cells[Columna][ini] = num;
+		m->Cells[Columna][fin] = num;
+	}
+}
 
 //Algoritmos con Matrices
-
 void limpiarM(TStringGrid *m, Byte Col, Byte Row){
 	if (Row>1) {
 		limpiarV(m,Col,Row);
@@ -627,22 +647,17 @@ void limpiarM(TStringGrid *m, Byte Col, Byte Row){
 	   limpiarV(m,Col,Row);
 }
 
-
-// Auxiliares
-void llenarHorizontal(TStringGrid *v, Byte Col, Byte Row,Byte num){
-	if (Col>1) {
-		v->Cells[Col-1][Row-1] = num;
-		llenarHorizontal(v,Col-1,Row,num);
-	} else
-		v->Cells[Col-1][Row-1] = num;
-}
-
-void llenarVertical(TStringGrid *v, Byte Col, Byte Row,Byte num){
-	if (Row>1) {
-		v->Cells[Col-1][Row-1] = num;
-		llenarVertical(v,Col,Row-1,num);
-	} else
-		v->Cells[Col-1][Row-1] = num;
+void llenarCuadrado(TStringGrid *m, byte ini, byte fin){
+	byte n = fin-ini+1;
+	if (n==1)
+		m->Cells[ini][ini]= 1;
+	else if(n>1){
+		llenarCuadrado(m,ini+1,fin-1);
+		llenarHorizontal(m,ini,ini,fin,(n+1)/2);
+		llenarHorizontal(m,fin,ini,fin,(n+1)/2);
+		llenarVertical(m,ini,ini,fin,(n+1)/2);
+		llenarVertical(m,fin,ini,fin,(n+1)/2);
+	}
 }
 
 
@@ -675,7 +690,7 @@ void cargarVec2carac(TStringGrid *v, AnsiString cad){
 		v->Cells[v->ColCount-1][v->RowCount-1] = cad;
 }
 
-void llenarMatriz(TStringGrid *m ,Byte Col,Byte Row, Byte *In,Byte *num){
+/*void llenarMatriz(TStringGrid *m ,Byte Col,Byte Row, Byte *In,Byte *num){
 	if (Col > 1 && Row > 1 ) {
 		llenarHorizontal(m,Col,*In,*num);
 		llenarVertical(m,Col,Row,*num);
@@ -685,7 +700,7 @@ void llenarMatriz(TStringGrid *m ,Byte Col,Byte Row, Byte *In,Byte *num){
 	} else{
 		m->Cells[0][0] = *num;
 	}
-}
+}  */
 
 //Retos Celeste
 
@@ -1185,11 +1200,11 @@ void __fastcall TForm1::Cargarunvectorconlosprimeros2caracteresdecadapalabradeun
 
 void __fastcall TForm1::CargarunaMatrizdelasiguienteforma1Click(TObject *Sender)
 {
-	Byte in=1;
-	Byte num = 1;
+	//Byte in=1;
+	//Byte num = 1;
 	//llenarHorizontal(SG1,SG1->ColCount,SG1->RowCount,Ed1->Text.ToInt());
 	//llenarVertical(SG1,SG1->ColCount,SG1->RowCount,Ed1->Text.ToInt());
-	llenarMatriz(SG1,SG1->ColCount,SG1->RowCount,&in,&num);
+	//llenarMatriz(SG1,SG1->ColCount,SG1->RowCount,&in,&num);
 }
 //---------------------------------------------------------------------------
 
@@ -1215,6 +1230,12 @@ void __fastcall TForm1::Prueba21Click(TObject *Sender)
 {
 	AnsiString res = cadConUlt(SG1,SG1->ColCount);
 	ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::LlenarCuadrado1Click(TObject *Sender)
+{
+	llenarCuadrado(SG1,0,SG1->ColCount-1);
 }
 //---------------------------------------------------------------------------
 

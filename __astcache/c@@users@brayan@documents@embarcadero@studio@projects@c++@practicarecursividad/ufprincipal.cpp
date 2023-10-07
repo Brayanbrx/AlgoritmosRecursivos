@@ -718,6 +718,20 @@ void vectorConVocales(TStringGrid *v, AnsiString cad){
 		v->Cells[v->ColCount-1][0] = sacarVoc(pal);
 }
 
+AnsiString cadConUlt(TStringGrid *v,Byte Col){
+AnsiString res;
+	if (Col>1) {
+		AnsiString pal = v->Cells[Col-1][0];
+		res = cadConUlt(v,Col-1);
+			pal = pal.Trim();
+			res = res + pal[pal.Length()];
+	} else{
+		res = v->Cells[0][0];
+		res = res.Trim();
+		res = res[res.Length()];
+	}
+	return res;
+}
 
 //---------------------------------------------------------------------------
 
@@ -1200,7 +1214,7 @@ void __fastcall TForm1::Prueba11Click(TObject *Sender)
 void __fastcall TForm1::Prueba21Click(TObject *Sender)
 {
 	AnsiString res = cadConUlt(SG1,SG1->ColCount);
-	ShowMessagew(res);
+	ShowMessage(res);
 }
 //---------------------------------------------------------------------------
 

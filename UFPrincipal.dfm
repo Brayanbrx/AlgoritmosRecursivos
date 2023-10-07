@@ -321,6 +321,10 @@ object Form1: TForm1
         Caption = 'Limpiar Matriz'
         OnClick = LimpiarMatriz1Click
       end
+      object LlenarCuadrado1: TMenuItem
+        Caption = 'Llenar Cuadrado'
+        OnClick = LlenarCuadrado1Click
+      end
     end
     object Auxiliares1: TMenuItem
       Caption = 'Auxiliares'

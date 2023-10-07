@@ -607,13 +607,131 @@ void MergeSort(TStringGrid *v, Byte inicio, Byte fin) {
     }
 }
 
-
-
+void limpiarV(TStringGrid *v, Byte Col, Byte Row){
+	if (Col > 1) {
+		v->Cells[Col-1][Row-1] = ' ';
+		limpiarV(v, Col-1 , Row);
+	} else
+		v->Cells[Col-1][Row-1] = ' ';
+}
 
 
 
 //Algoritmos con Matrices
 
+void limpiarM(TStringGrid *m, Byte Col, Byte Row){
+	if (Row>1) {
+		limpiarV(m,Col,Row);
+		limpiarM(m,Col,Row-1);
+	} else
+	   limpiarV(m,Col,Row);
+}
+
+
+// Auxiliares
+void llenarHorizontal(TStringGrid *v, Byte Col, Byte Row,Byte num){
+	if (Col>1) {
+		v->Cells[Col-1][Row-1] = num;
+		llenarHorizontal(v,Col-1,Row,num);
+	} else
+		v->Cells[Col-1][Row-1] = num;
+}
+
+void llenarVertical(TStringGrid *v, Byte Col, Byte Row,Byte num){
+	if (Row>1) {
+		v->Cells[Col-1][Row-1] = num;
+		llenarVertical(v,Col,Row-1,num);
+	} else
+		v->Cells[Col-1][Row-1] = num;
+}
+
+
+//Modelos de Examenes
+void cargarVectorDig(TStringGrid *v, Cardinal num){
+	if (num==0) {
+		v->Cells[v->ColCount-1][0] = num;
+	}
+	else if (num<10) {
+		v->Cells[v->ColCount-1][0] = num;
+	} else{
+		byte deci = num%100;
+		//num = num / 100;
+		cargarVectorDig(v,num/100);
+			v->ColCount++;
+			v->Cells[v->ColCount-1][0] = deci;
+    }
+}
+
+void cargarVec2carac(TStringGrid *v, AnsiString cad){
+	cad = cad.Trim();
+	if (cad.Length()>1) {
+		byte pos = cad.LastDelimiter(' ');
+		AnsiString pal = cad.SubString(pos+1,cad.Length()-pos);
+		cad.Delete(pos+1,cad.Length()-pos);
+		cargarVec2carac(v,cad);
+			v->Cells[v->ColCount-1][0] = (pal.Length()>1) ? pal.SubString(0,2) : pal[0];
+			v->ColCount++;
+	} else
+		v->Cells[v->ColCount-1][v->RowCount-1] = cad;
+}
+
+void llenarMatriz(TStringGrid *m ,Byte Col,Byte Row, Byte *In,Byte *num){
+	if (Col > 1 && Row > 1 ) {
+		llenarHorizontal(m,Col,*In,*num);
+		llenarVertical(m,Col,Row,*num);
+		*num = *num + 1;
+		llenarHorizontal(m,Col,Row,*num);
+		llenarVertical(m,*In,Row,*num);
+	} else{
+		m->Cells[0][0] = *num;
+	}
+}
+
+//Retos Celeste
+
+AnsiString sacarVoc(AnsiString cad){
+AnsiString cade; char letra;
+	if (cad.Length() > 0) {
+		letra = cad[cad.Length()];
+		cad = cad.Delete(cad.Length(), 1);
+		if (isvocal(letra)) {
+			cade = sacarVoc(cad);
+			cade = cade + letra;
+		} else
+			cade = sacarVoc(cad);
+	}
+	return cade;
+}
+
+
+void vectorConVocales(TStringGrid *v, AnsiString cad){
+	cad = cad.Trim();
+	AnsiString pal;
+	if (cad.Length()>1) {
+		byte pos = cad.LastDelimiter(' ');
+		pal = cad.SubString(pos+1,cad.Length()-pos);
+		cad.Delete(pos+1,cad.Length()-pos);
+		vectorConVocales(v,cad);
+			v->Cells[v->ColCount-1][0] = sacarVoc(pal);
+			v->ColCount++;
+	} else
+		v->Cells[v->ColCount-1][0] = sacarVoc(pal);
+}
+
+AnsiString cadConUlt(TStringGrid *v,Byte Col){
+AnsiString res;
+	if (Col>1) {
+		AnsiString pal = v->Cells[Col-1][0];
+		res = cadConUlt(v,Col-1);
+			pal = pal.Trim();
+			res = res + pal[pal.Length()];
+	} else{
+		res = v->Cells[0][0];
+		res = res.Trim();
+		res = res[res.Length()];
+	}
+	return res;
+}
 
 //---------------------------------------------------------------------------
 
@@ -963,11 +1081,10 @@ void __fastcall TForm1::edColumnaChange(TObject *Sender)
 void __fastcall TForm1::SG1DrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
 		  TGridDrawState State)
 {
-	  /*TStringGrid *grid = dynamic_cast<TStringGrid*>(Sender);
-
-	grid->Canvas->Pen->Color = clBlue;
-	grid->Canvas->Rectangle(Rect.Left, Rect.Top, Rect.Right, Rect.Bottom); */
-
+    TColor borderColor = clHighlight; // Cambia este color según tus preferencias
+	SG1->Canvas->Pen->Color = borderColor;
+	SG1->Canvas->Brush->Style = bsClear;
+	SG1->Canvas->Rectangle(Rect);
 }
 //---------------------------------------------------------------------------
 
@@ -1035,7 +1152,69 @@ void __fastcall TForm1::InsertionSort1Click(TObject *Sender)
 
 void __fastcall TForm1::MergeSort1Click(TObject *Sender)
 {
-	MergeSort(SG1,SG1->ColCount);
+	//MergeSort(SG1,SG1->ColCount);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::LimpiarMatriz1Click(TObject *Sender)
+{
+	limpiarM(SG1, SG1->RowCount, SG1->ColCount);
+	//limpiarV(SG1, SG1->ColCount, SG1->RowCount);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CargarunVectorconparesdeDigitosdeunnumero1Click(TObject *Sender)
+
+{
+	Cardinal num = Ed1->Text.ToInt();
+	//ShowMessage(num);
+	cargarVectorDig(SG1, num);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Cargarunvectorconlosprimeros2caracteresdecadapalabradeunacadena1Click(TObject *Sender)
+
+{
+	limpiarV(SG1,SG1->ColCount,SG1->RowCount);
+	SG1->ColCount=1;
+	AnsiString cadena = Ed1->Text;
+	cargarVec2carac(SG1,cadena);
+	SG1->ColCount--;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CargarunaMatrizdelasiguienteforma1Click(TObject *Sender)
+{
+	Byte in=1;
+	Byte num = 1;
+	//llenarHorizontal(SG1,SG1->ColCount,SG1->RowCount,Ed1->Text.ToInt());
+	//llenarVertical(SG1,SG1->ColCount,SG1->RowCount,Ed1->Text.ToInt());
+	llenarMatriz(SG1,SG1->ColCount,SG1->RowCount,&in,&num);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::RetoCeleste1Click(TObject *Sender)
+{
+	//AnsiString cad = Ed1->Text;
+	//vectorConVocales(SG1,SG1->ColCount, cad);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Prueba11Click(TObject *Sender)
+{
+	limpiarV(SG1,SG1->ColCount,SG1->RowCount);
+	SG1->ColCount=1;
+	AnsiString cadena = Ed1->Text;
+	vectorConVocales(SG1,cadena);
+	SG1->ColCount--;
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Prueba21Click(TObject *Sender)
+{
+	AnsiString res = cadConUlt(SG1,SG1->ColCount);
+	ShowMessage(res);
 }
 //---------------------------------------------------------------------------
 

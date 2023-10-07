@@ -93,6 +93,7 @@ __published:	// IDE-managed Components
 	TMenuItem *RetoCeleste1;
 	TMenuItem *Prueba11;
 	TMenuItem *Prueba21;
+	TMenuItem *LlenarCuadrado1;
 	void __fastcall SumaDigClick(TObject *Sender);
 	void __fastcall ContarDigitosPares1Click(TObject *Sender);
 	void __fastcall SumarDigitosPares1Click(TObject *Sender);
@@ -152,6 +153,7 @@ __published:	// IDE-managed Components
 	void __fastcall RetoCeleste1Click(TObject *Sender);
 	void __fastcall Prueba11Click(TObject *Sender);
 	void __fastcall Prueba21Click(TObject *Sender);
+	void __fastcall LlenarCuadrado1Click(TObject *Sender);
 
 
 

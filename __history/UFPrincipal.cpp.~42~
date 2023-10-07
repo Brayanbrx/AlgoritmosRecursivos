@@ -615,7 +615,32 @@ void limpiarV(TStringGrid *v, Byte Col, Byte Row){
 		v->Cells[Col-1][Row-1] = ' ';
 }
 
+// Auxiliares
+void llenarHorizontal(TStringGrid *v, Byte Fila, Byte ini, Byte fin, Byte num){
+	byte n = fin-ini+1;
+	if (n==1) {
+		v->Cells[ini][Fila]=num;
+	} else if(n>1){
+		llenarHorizontal(v,Fila,ini+1,fin-1,num);
+		v->Cells[ini][Fila] = num;
+		v->Cells[fin][Fila] = num;
 
+	}
+
+}
+
+void llenarVertical(TStringGrid *v, Byte Columna, Byte ini, Byte fin, Byte num){
+	byte n = fin-ini+1;
+	if (n==1) {
+		v->Cells[Columna][ini]=num;
+	} else if(n>1){
+		llenarHorizontal(v,Columna,ini+1,fin-1,num);
+		v->Cells[Columna][ini] = num;
+		v->Cells[Columna][fin] = num;
+
+	}
+
+}
 
 
 //Algoritmos con Matrices
@@ -627,6 +652,29 @@ void limpiarM(TStringGrid *m, Byte Col, Byte Row){
 	} else
 	   limpiarV(m,Col,Row);
 }
+
+
+
+
+void llenarCuadrado(TStringGrid *m, byte ini, byte fin){
+	byte n = fin-ini+1;
+	if (n==1) {
+		m->Cells[ini][ini]= 1;
+	}
+	else if(n>1){
+		llenarCuadrado(m,ini+1,fin-1);
+		llenarHorizontal(m,ini,ini,fin,(n+1)/2);
+		llenarHorizontal(m,fin,ini,fin,(n+1)/2);
+		llenarVertical(m,ini,ini,fin,(n+1)/2);
+		llenarVertical(m,fin,ini,fin,(n+1)/2);
+
+	}
+
+}
+
+
+
+
 
 
 //Modelos de Examenes
@@ -648,13 +696,73 @@ void cargarVectorDig(TStringGrid *v, Cardinal num){
 void cargarVec2carac(TStringGrid *v, AnsiString cad){
 	cad = cad.Trim();
 	if (cad.Length()>1) {
-        byte pos = cad.
-
-	} else{
+		byte pos = cad.LastDelimiter(' ');
+		AnsiString pal = cad.SubString(pos+1,cad.Length()-pos);
+		cad.Delete(pos+1,cad.Length()-pos);
+		cargarVec2carac(v,cad);
+			v->Cells[v->ColCount-1][0] = (pal.Length()>1) ? pal.SubString(0,2) : pal[0];
+			v->ColCount++;
+	} else
 		v->Cells[v->ColCount-1][v->RowCount-1] = cad;
-	}
 }
 
+/*void llenarMatriz(TStringGrid *m ,Byte Col,Byte Row, Byte *In,Byte *num){
+	if (Col > 1 && Row > 1 ) {
+		llenarHorizontal(m,Col,*In,*num);
+		llenarVertical(m,Col,Row,*num);
+		*num = *num + 1;
+		llenarHorizontal(m,Col,Row,*num);
+		llenarVertical(m,*In,Row,*num);
+	} else{
+		m->Cells[0][0] = *num;
+	}
+}  */
+
+//Retos Celeste
+
+AnsiString sacarVoc(AnsiString cad){
+AnsiString cade; char letra;
+	if (cad.Length() > 0) {
+		letra = cad[cad.Length()];
+		cad = cad.Delete(cad.Length(), 1);
+		if (isvocal(letra)) {
+			cade = sacarVoc(cad);
+			cade = cade + letra;
+		} else
+			cade = sacarVoc(cad);
+	}
+	return cade;
+}
+
+
+void vectorConVocales(TStringGrid *v, AnsiString cad){
+	cad = cad.Trim();
+	AnsiString pal;
+	if (cad.Length()>1) {
+		byte pos = cad.LastDelimiter(' ');
+		pal = cad.SubString(pos+1,cad.Length()-pos);
+		cad.Delete(pos+1,cad.Length()-pos);
+		vectorConVocales(v,cad);
+			v->Cells[v->ColCount-1][0] = sacarVoc(pal);
+			v->ColCount++;
+	} else
+		v->Cells[v->ColCount-1][0] = sacarVoc(pal);
+}
+
+AnsiString cadConUlt(TStringGrid *v,Byte Col){
+AnsiString res;
+	if (Col>1) {
+		AnsiString pal = v->Cells[Col-1][0];
+		res = cadConUlt(v,Col-1);
+			pal = pal.Trim();
+			res = res + pal[pal.Length()];
+	} else{
+		res = v->Cells[0][0];
+		res = res.Trim();
+		res = res[res.Length()];
+	}
+	return res;
+}
 
 //---------------------------------------------------------------------------
 
@@ -1098,8 +1206,52 @@ void __fastcall TForm1::CargarunVectorconparesdeDigitosdeunnumero1Click(TObject 
 void __fastcall TForm1::Cargarunvectorconlosprimeros2caracteresdecadapalabradeunacadena1Click(TObject *Sender)
 
 {
+	limpiarV(SG1,SG1->ColCount,SG1->RowCount);
+	SG1->ColCount=1;
 	AnsiString cadena = Ed1->Text;
 	cargarVec2carac(SG1,cadena);
+	SG1->ColCount--;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::CargarunaMatrizdelasiguienteforma1Click(TObject *Sender)
+{
+	//Byte in=1;
+	//Byte num = 1;
+	//llenarHorizontal(SG1,SG1->ColCount,SG1->RowCount,Ed1->Text.ToInt());
+	//llenarVertical(SG1,SG1->ColCount,SG1->RowCount,Ed1->Text.ToInt());
+	//llenarMatriz(SG1,SG1->ColCount,SG1->RowCount,&in,&num);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::RetoCeleste1Click(TObject *Sender)
+{
+	//AnsiString cad = Ed1->Text;
+	//vectorConVocales(SG1,SG1->ColCount, cad);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Prueba11Click(TObject *Sender)
+{
+	limpiarV(SG1,SG1->ColCount,SG1->RowCount);
+	SG1->ColCount=1;
+	AnsiString cadena = Ed1->Text;
+	vectorConVocales(SG1,cadena);
+	SG1->ColCount--;
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Prueba21Click(TObject *Sender)
+{
+	AnsiString res = cadConUlt(SG1,SG1->ColCount);
+	ShowMessage(res);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::LlenarCuadrado1Click(TObject *Sender)
+{
+	llenarCuadrado(SG1,0,5);
 }
 //---------------------------------------------------------------------------
 
